@@ -78,7 +78,7 @@ Public Class ModBusEastronDSM360 : Inherits SerialPort
             '  Return True
          End If
       Else
-         RaiseEvent Device_Status_Changed(False, PortName + ": niet open")
+         RaiseEvent Device_Status_Changed(False, PortName + ": not open")
       End If
    End Sub
 

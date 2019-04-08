@@ -26,7 +26,7 @@ Public Class ModBusClient : Inherits ModBusEastronDSM360
       If registers.Length = 4 Then
          Return BitConverter.ToSingle({registers(3), registers(2), registers(1), registers(0)}, 0)
       Else
-         Throw New ArgumentException("Input Array length invalid - Array langth must be '4'")
+         Throw New ArgumentException("Input Array length invalid - Array length must be '4'")
       End If
    End Function
 
@@ -34,7 +34,7 @@ Public Class ModBusClient : Inherits ModBusEastronDSM360
       If registers.Length = 4 Then
          Return BitConverter.ToInt32({registers(3), registers(2), registers(1), registers(0)}, 0)
       Else
-         Throw New ArgumentException("Input Array length invalid - Array langth must be '4'")
+         Throw New ArgumentException("Input Array length invalid - Array length must be '4'")
       End If
    End Function
 End Class
