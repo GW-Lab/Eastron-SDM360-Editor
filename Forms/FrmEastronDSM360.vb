@@ -1,4 +1,20 @@
-﻿Public Class FrmEastronDSM360
+﻿' Program..: FrmEastronDSM360.vb
+' Author...: G. Wassink
+' Design...: 
+' Date.....: 08/04/2019 Last revised:08/04/2019
+' Notice...: Copyright 1994-2016 All Rights Reserved
+' Notes....: VB 16.0 .Net Framework 4.7.2
+' Files....: None
+' Programs.:
+' Reserved.:This SOFTWARE PRODUCT is provided by THE PROVIDER "as is" and "with all faults." THE PROVIDER makes no representations or warranties of any kind concerning the safety,
+'          : suitability, lack Of viruses, inaccuracies, typographical errors, Or other harmful components Of this SOFTWARE PRODUCT.
+'          : There are inherent dangers In the use Of any software, And you are solely responsible For determining whether this SOFTWARE PRODUCT Is compatible With your equipment
+'          : And other software installed On your equipment.
+'          : You are also solely responsible For the protection Of your equipment And backup Of your data, And THE PROVIDER will Not be liable For any damages you may suffer In connection
+'          : With Using, modifying, Or distributing this SOFTWARE PRODUCT.
+'          : Free To use 
+
+Public Class FrmEastronDSM360
    Private WithEvents ModBus As ModBusClient
 
    Private Sub BtnRead_Click(sender As Object, e As EventArgs) Handles BtnRead.Click
