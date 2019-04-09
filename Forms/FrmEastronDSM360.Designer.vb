@@ -24,7 +24,7 @@ Partial Class FrmEastronDSM360
    Private Sub InitializeComponent()
       Me.components = New System.ComponentModel.Container()
       Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEastronDSM360))
-      Me.BtnRead = New System.Windows.Forms.Button()
+      Me.BtnReadApply = New System.Windows.Forms.Button()
       Me.NudAddress = New System.Windows.Forms.NumericUpDown()
       Me.LblAddress = New System.Windows.Forms.Label()
       Me.NudQuantity = New System.Windows.Forms.NumericUpDown()
@@ -42,6 +42,10 @@ Partial Class FrmEastronDSM360
       Me.TlsStatus = New System.Windows.Forms.ToolStripStatusLabel()
       Me.RbtInput = New System.Windows.Forms.RadioButton()
       Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+      Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+      Me.GrpWrite = New System.Windows.Forms.GroupBox()
+      Me.NudWriteValue = New System.Windows.Forms.NumericUpDown()
+      Me.BtnWriteApply = New System.Windows.Forms.Button()
       Me.RbtHolding = New System.Windows.Forms.RadioButton()
       CType(Me.NudAddress, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.NudQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,16 +53,19 @@ Partial Class FrmEastronDSM360
       Me.CmsMain.SuspendLayout()
       Me.StsMain.SuspendLayout()
       Me.GroupBox1.SuspendLayout()
+      Me.GroupBox2.SuspendLayout()
+      Me.GrpWrite.SuspendLayout()
+      CType(Me.NudWriteValue, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
-      'BtnRead
+      'BtnReadApply
       '
-      Me.BtnRead.Location = New System.Drawing.Point(121, 71)
-      Me.BtnRead.Name = "BtnRead"
-      Me.BtnRead.Size = New System.Drawing.Size(60, 23)
-      Me.BtnRead.TabIndex = 0
-      Me.BtnRead.Text = "Read"
-      Me.BtnRead.UseVisualStyleBackColor = True
+      Me.BtnReadApply.Location = New System.Drawing.Point(107, 10)
+      Me.BtnReadApply.Name = "BtnReadApply"
+      Me.BtnReadApply.Size = New System.Drawing.Size(60, 23)
+      Me.BtnReadApply.TabIndex = 0
+      Me.BtnReadApply.Text = "Apply"
+      Me.BtnReadApply.UseVisualStyleBackColor = True
       '
       'NudAddress
       '
@@ -104,7 +111,7 @@ Partial Class FrmEastronDSM360
       Me.LblOutput.AutoSize = True
       Me.LblOutput.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
       Me.LblOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.LblOutput.Location = New System.Drawing.Point(6, 110)
+      Me.LblOutput.Location = New System.Drawing.Point(10, 15)
       Me.LblOutput.Name = "LblOutput"
       Me.LblOutput.Size = New System.Drawing.Size(14, 13)
       Me.LblOutput.TabIndex = 5
@@ -165,7 +172,7 @@ Partial Class FrmEastronDSM360
       'StsMain
       '
       Me.StsMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TsStatus})
-      Me.StsMain.Location = New System.Drawing.Point(0, 180)
+      Me.StsMain.Location = New System.Drawing.Point(0, 224)
       Me.StsMain.Name = "StsMain"
       Me.StsMain.Size = New System.Drawing.Size(190, 22)
       Me.StsMain.TabIndex = 9
@@ -186,7 +193,7 @@ Partial Class FrmEastronDSM360
       '
       Me.RbtInput.AutoSize = True
       Me.RbtInput.Checked = True
-      Me.RbtInput.Location = New System.Drawing.Point(8, 73)
+      Me.RbtInput.Location = New System.Drawing.Point(28, 66)
       Me.RbtInput.Name = "RbtInput"
       Me.RbtInput.Size = New System.Drawing.Size(49, 17)
       Me.RbtInput.TabIndex = 10
@@ -196,36 +203,76 @@ Partial Class FrmEastronDSM360
       '
       'GroupBox1
       '
+      Me.GroupBox1.Controls.Add(Me.GroupBox2)
+      Me.GroupBox1.Controls.Add(Me.GrpWrite)
       Me.GroupBox1.Controls.Add(Me.RbtHolding)
       Me.GroupBox1.Controls.Add(Me.RbtInput)
       Me.GroupBox1.Controls.Add(Me.NudAddress)
       Me.GroupBox1.Controls.Add(Me.LblAddress)
       Me.GroupBox1.Controls.Add(Me.NudQuantity)
       Me.GroupBox1.Controls.Add(Me.LblQuatity)
-      Me.GroupBox1.Controls.Add(Me.LblOutput)
-      Me.GroupBox1.Controls.Add(Me.BtnRead)
       Me.GroupBox1.Location = New System.Drawing.Point(2, 35)
       Me.GroupBox1.Name = "GroupBox1"
-      Me.GroupBox1.Size = New System.Drawing.Size(185, 142)
+      Me.GroupBox1.Size = New System.Drawing.Size(185, 186)
       Me.GroupBox1.TabIndex = 11
       Me.GroupBox1.TabStop = False
       Me.GroupBox1.Text = "Registers"
       '
+      'GroupBox2
+      '
+      Me.GroupBox2.Controls.Add(Me.LblOutput)
+      Me.GroupBox2.Controls.Add(Me.BtnReadApply)
+      Me.GroupBox2.Location = New System.Drawing.Point(6, 89)
+      Me.GroupBox2.Name = "GroupBox2"
+      Me.GroupBox2.Size = New System.Drawing.Size(173, 38)
+      Me.GroupBox2.TabIndex = 15
+      Me.GroupBox2.TabStop = False
+      Me.GroupBox2.Text = "Read"
+      '
+      'GrpWrite
+      '
+      Me.GrpWrite.Controls.Add(Me.NudWriteValue)
+      Me.GrpWrite.Controls.Add(Me.BtnWriteApply)
+      Me.GrpWrite.Location = New System.Drawing.Point(5, 127)
+      Me.GrpWrite.Name = "GrpWrite"
+      Me.GrpWrite.Size = New System.Drawing.Size(175, 44)
+      Me.GrpWrite.TabIndex = 14
+      Me.GrpWrite.TabStop = False
+      Me.GrpWrite.Text = "Write"
+      '
+      'NudWriteValue
+      '
+      Me.NudWriteValue.Location = New System.Drawing.Point(8, 16)
+      Me.NudWriteValue.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
+      Me.NudWriteValue.Name = "NudWriteValue"
+      Me.NudWriteValue.Size = New System.Drawing.Size(75, 20)
+      Me.NudWriteValue.TabIndex = 13
+      Me.NudWriteValue.Value = New Decimal(New Integer() {1, 0, 0, 0})
+      '
+      'BtnWriteApply
+      '
+      Me.BtnWriteApply.Location = New System.Drawing.Point(109, 15)
+      Me.BtnWriteApply.Name = "BtnWriteApply"
+      Me.BtnWriteApply.Size = New System.Drawing.Size(60, 23)
+      Me.BtnWriteApply.TabIndex = 12
+      Me.BtnWriteApply.Text = "Apply"
+      Me.BtnWriteApply.UseVisualStyleBackColor = True
+      '
       'RbtHolding
       '
       Me.RbtHolding.AutoSize = True
-      Me.RbtHolding.Location = New System.Drawing.Point(59, 73)
+      Me.RbtHolding.Location = New System.Drawing.Point(83, 67)
       Me.RbtHolding.Name = "RbtHolding"
       Me.RbtHolding.Size = New System.Drawing.Size(61, 17)
       Me.RbtHolding.TabIndex = 11
       Me.RbtHolding.Text = "Holding"
       Me.RbtHolding.UseVisualStyleBackColor = True
       '
-      'FrmModBus
+      'FrmEastronDSM360
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(190, 202)
+      Me.ClientSize = New System.Drawing.Size(190, 246)
       Me.ControlBox = False
       Me.Controls.Add(Me.GroupBox1)
       Me.Controls.Add(Me.StsMain)
@@ -233,7 +280,7 @@ Partial Class FrmEastronDSM360
       Me.Controls.Add(Me.Label4)
       Me.Controls.Add(Me.NudModBusID)
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-      Me.Name = "FrmModBus"
+      Me.Name = "FrmEastronDSM360"
       Me.Text = "Eastron DSM360-V2"
       CType(Me.NudAddress, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.NudQuantity, System.ComponentModel.ISupportInitialize).EndInit()
@@ -243,12 +290,16 @@ Partial Class FrmEastronDSM360
       Me.StsMain.PerformLayout()
       Me.GroupBox1.ResumeLayout(False)
       Me.GroupBox1.PerformLayout()
+      Me.GroupBox2.ResumeLayout(False)
+      Me.GroupBox2.PerformLayout()
+      Me.GrpWrite.ResumeLayout(False)
+      CType(Me.NudWriteValue, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
    End Sub
 
-   Friend WithEvents BtnRead As Button
+   Friend WithEvents BtnReadApply As Button
    Friend WithEvents NudAddress As NumericUpDown
    Friend WithEvents LblAddress As Label
    Friend WithEvents NudQuantity As NumericUpDown
@@ -267,4 +318,8 @@ Partial Class FrmEastronDSM360
    Friend WithEvents GroupBox1 As GroupBox
    Friend WithEvents RbtHolding As RadioButton
    Friend WithEvents TsStatus As ToolStripStatusLabel
+   Friend WithEvents GrpWrite As GroupBox
+   Friend WithEvents NudWriteValue As NumericUpDown
+   Friend WithEvents BtnWriteApply As Button
+   Friend WithEvents GroupBox2 As GroupBox
 End Class

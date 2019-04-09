@@ -1,4 +1,6 @@
-﻿'Below Is an example of Modbus RTU Request And Response messages with explanation of each item.
+﻿' The maximum size Of a MODBUS RTU frame Is 256 bytes. 
+
+'Below Is an example of Modbus RTU Request And Response messages with explanation of each item.
 ' First, a master sends a request telling the slave 1 to return the value of one Holding register (function 3) starting at address 2.
 '
 '  slave id                                    (1 byte)

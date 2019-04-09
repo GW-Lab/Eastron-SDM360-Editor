@@ -1,7 +1,8 @@
 ﻿Imports System.IO.Ports
 
-Public Class ModBusEastronDSM360 : Inherits SerialPort
-   Const ModBusPacketLengthExclPayload = 7
+Public Class ModBusDSM360 : Inherits SerialPort
+   Const ModBusReadPacketLengthExclPayload = 7
+   Const ModBusWritePacketLengthExclPayload = 6
 
    Private currModBusID As UShort
    Private currFun As Byte
@@ -38,6 +39,7 @@ Public Class ModBusEastronDSM360 : Inherits SerialPort
       Degrees
       ModBusID
       kWh
+      Minutes
       ParityStopBits
       Password
       PasswordLock
@@ -54,6 +56,7 @@ Public Class ModBusEastronDSM360 : Inherits SerialPort
 
    Public Enum ModBusFun As Byte
       Holding = 3
+      HoldingWrite = 16
       Input = 4
    End Enum
 
@@ -68,7 +71,34 @@ Public Class ModBusEastronDSM360 : Inherits SerialPort
 
             Write(packet.ToArray, 0, packet.Count)
 
-            Me.bytesExpected = ModBusPacketLengthExclPayload + quantity * 2
+            Me.bytesExpected = ModBusReadPacketLengthExclPayload + quantity * 2
+            Me.currUnit = GetUnit(startAddress)
+            Me.currModBusID = modBusId
+            Me.currFun = fun
+
+            StartTimeOut()
+         Else
+            '  Return True
+         End If
+      Else
+         RaiseEvent Device_Status_Changed(False, PortName + ": not open")
+      End If
+   End Sub
+
+   Public Sub WriteHoldingRegisters(modBusId As Byte, fun As ModBusFun, startAddress As UShort, quantity As UShort, value As UShort)
+      If IsOpen Then
+         If Not Me.requestSend Then
+            Dim packet = New ModBusPacket
+            packet.AddRange({modBusId, fun})                                                                                        ' DeviceIndentifier/ModBus Fuction-Code 3 = Read Holding register, Fuction Code 4 = Read Input register
+            packet.AddRange(RebaseAddress(startAddress, fun))                                                                       ' StartAddress MDS360 internal = 00
+            packet.AddRange(BitConverter.GetBytes(quantity * 2US).Reverse)                                                          ' Number of registers 
+            packet.Add(CByte(quantity * 4US))                                                                                       ' Byte count
+            packet.AddRange(BitConverter.GetBytes(value).Reverse)                                                                   ' Payload
+            packet.AddCRC()                                                                                                         ' Read ALL data added to the packet until now Compute CRC16 and append the CRC16 to the packet
+
+            Write(packet.ToArray, 0, packet.Count)
+
+            Me.bytesExpected = ModBusWritePacketLengthExclPayload + quantity * 2
             Me.currUnit = GetUnit(startAddress)
             Me.currModBusID = modBusId
             Me.currFun = fun
@@ -93,6 +123,7 @@ Public Class ModBusEastronDSM360 : Inherits SerialPort
          Case 30013 To 30017 : Return Unit.Watt
          Case 30019 To 30023 : Return Unit.VA
          Case 30037 To 30041 : Return Unit.Degrees
+         Case 40003 To 40003 : Return Unit.Minutes
          Case 40007 To 40007 : Return Unit.SystemVolts
          Case 40009 To 40009 : Return Unit.Ampere
          Case 40011 To 40011 : Return Unit.SystemType

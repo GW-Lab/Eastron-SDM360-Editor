@@ -1,6 +1,6 @@
 ﻿Imports System.IO.Ports
 
-Public Class ModBusClient : Inherits ModBusEastronDSM360
+Public Class ModBusClient : Inherits ModBusDSM360
    Public Event Port_Status_Changed(isOpen As Boolean, message As String)
 
    Public Sub New(comPort As String, baudRate As Integer, dataBits As Integer, stopBits As StopBits, parity As Parity, readTimeOutms As Integer, writeTimeOutms As Integer)
