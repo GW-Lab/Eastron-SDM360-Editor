@@ -207,7 +207,7 @@ Partial Class FrmSettings
       Me.Controls.Add(Me.GrpUSB)
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
       Me.Name = "FrmSettings"
-      Me.Text = "Eastron DSM360-V2"
+      Me.Text = "Eastron SDM360-V2"
       Me.GrpUSB.ResumeLayout(False)
       Me.GrpUSB.PerformLayout()
       CType(Me.NudPassword, System.ComponentModel.ISupportInitialize).EndInit()

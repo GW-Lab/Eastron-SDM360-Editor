@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-         Me.MainForm = FrmEastronDSM360
+         Me.MainForm = Global.EastronSDM360.FrmSDM360
       End Sub
     End Class
 End Namespace

@@ -1,7 +1,7 @@
-﻿' Program..: ModBusClient.vb
+﻿' Program..: SDM360Client.vb
 ' Author...: G. Wassink
 ' Design...: 
-' Date.....: 11/03/2019 Last revised:10/04/2019
+' Date.....: 08/04/2019 Last revised:10/04/2019
 ' Notice...: Copyright 2019 All Rights Reserved
 ' Notes....: VB 16.0.1 .Net Framework 4.7.2
 ' Files....: None
@@ -10,7 +10,7 @@
 
 Imports System.IO.Ports
 
-Public Class ModBusClient : Inherits ModBusDSM360
+Public Class SDM360Client : Inherits SDM360
    Public Event Port_Status_Changed(isOpen As Boolean, message As String)
 
    Public Sub New(comPort As String, baudRate As Integer, dataBits As Integer, stopBits As StopBits, parity As Parity, readTimeOutms As Integer, writeTimeOutms As Integer)
@@ -26,6 +26,7 @@ Public Class ModBusClient : Inherits ModBusDSM360
    Public Overloads Sub Open()
       Try
          MyBase.Open()
+
          RaiseEvent Port_Status_Changed(IsOpen, PortName + ": Opened")
       Catch ex As Exception
          RaiseEvent Port_Status_Changed(IsOpen, PortName + ": not available!!")

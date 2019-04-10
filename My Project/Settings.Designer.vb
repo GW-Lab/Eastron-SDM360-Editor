@@ -160,9 +160,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.EastronDSM360.My.MySettings
+        Friend ReadOnly Property Settings() As Global.EastronSDM360.My.MySettings
             Get
-                Return Global.EastronDSM360.My.MySettings.Default
+                Return Global.EastronSDM360.My.MySettings.Default
             End Get
         End Property
     End Module

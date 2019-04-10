@@ -1,4 +1,4 @@
-﻿' Program..: Sonos.vb
+﻿' Program..: SDM360.vb
 ' Author...: G. Wassink
 ' Design...: 
 ' Date.....: 10/04/2019 Last revised:10/04/2019
@@ -10,7 +10,7 @@
 
 Imports System.IO.Ports
 
-Public Class ModBusDSM360 : Inherits SerialPort
+Public Class SDM360 : Inherits SerialPort
    Const ModBusReadPacketLengthExclPayload = 7
    Const ModBusWritePacketLengthExclPayload = 6
 
@@ -80,7 +80,7 @@ Public Class ModBusDSM360 : Inherits SerialPort
          If Not Me.requestSend Then
             Dim packet = New ModBusPacket
             packet.AddRange({modBusId, fun})                                                                                        ' DeviceIndentifier/ModBus Fuction-Code 3 = Read Holding register, Fuction Code 4 = Read Input register
-            packet.AddRange(RebaseAddress(startAddress, fun))                                                                       ' StartAddress MDS360 internal = 00
+            packet.AddRange(RebaseAddress(startAddress, fun))                                                                       ' StartAddress SDM360 internal = 00
             packet.AddRange(BitConverter.GetBytes(quantity * 2US).Reverse)                                                          ' Quantity
             packet.AddCRC()                                                                                                         ' Read ALL data added to the packet until now Compute CRC16 and append the CRC16 to the packet
 
@@ -100,12 +100,12 @@ Public Class ModBusDSM360 : Inherits SerialPort
       End If
    End Sub
 
-   Public Sub WriteHoldingRegisters(modBusId As Byte, fun As ModBusFun, startAddress As UShort, quantity As UShort, value As Single)
+   Public Sub WriteHoldingRegisters(modBusId As Byte, startAddress As UShort, quantity As UShort, value As Single)
       If IsOpen Then
          If Not Me.requestSend Then
             Dim packet = New ModBusPacket
-            packet.AddRange({modBusId, fun})                                                                                        ' DeviceIndentifier/ModBus Fuction-Code 3 = Read Holding register, Fuction Code 4 = Read Input register
-            packet.AddRange(RebaseAddress(startAddress, fun))                                                                       ' StartAddress MDS360 internal = 00
+            packet.AddRange({modBusId, ModBusFun.HoldingWrite})                                                                     ' DeviceIndentifier/ModBus Fuction-Code 3 = Read Holding register, Fuction Code 4 = Read Input register
+            packet.AddRange(RebaseAddress(startAddress, ModBusFun.HoldingWrite))                                                    ' StartAddress SDM360 internal = 00
             packet.AddRange(BitConverter.GetBytes(quantity * 2US).Reverse)                                                          ' Number of registers 
             packet.Add(CByte(quantity * 4US))                                                                                       ' Byte count
             packet.AddRange(BitConverter.GetBytes(value).Reverse)                                                                   ' Payload
@@ -116,7 +116,7 @@ Public Class ModBusDSM360 : Inherits SerialPort
             Me.bytesExpected = ModBusWritePacketLengthExclPayload + quantity * 2
             Me.currUnit = GetUnit(startAddress)
             Me.currModBusID = modBusId
-            Me.currFun = fun
+            Me.currFun = ModBusFun.HoldingWrite
 
             StartTimeOut()
          End If
@@ -162,7 +162,7 @@ Public Class ModBusDSM360 : Inherits SerialPort
          Read(buffer, 0, buffer.Length)                              ' Read data into receive buffer
 
          If ModBusPacket.CRC16(buffer) Then
-            RaiseEvent Receive_Data_Changed(ModBusClient.ConvertToFloat({buffer(3), buffer(4), buffer(5), buffer(6)}), Me.currUnit, Me.currFun, "Ok")
+            RaiseEvent Receive_Data_Changed(SDM360Client.ConvertToFloat({buffer(3), buffer(4), buffer(5), buffer(6)}), Me.currUnit, Me.currFun, "Ok")
          Else
             RaiseEvent Receive_Data_Changed(0, Me.currUnit, Me.currFun, "CRC-Error!!")
          End If

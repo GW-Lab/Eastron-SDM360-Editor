@@ -1,4 +1,4 @@
-﻿' Program..: FrmEastronDSM360.vb
+﻿' Program..: FrmSDM360.vb
 ' Author...: G. Wassink
 ' Design...: 
 ' Date.....: 08/04/2019 Last revised:10/04/2019
@@ -14,38 +14,38 @@
 '          : With Using, modifying, Or distributing this SOFTWARE PRODUCT.
 '          : Free To use 
 
-Public Class FrmEastronDSM360
-   Private WithEvents ModBus As ModBusClient
+Public Class FrmSDM360
+   Private WithEvents SDM360 As SDM360Client
 
    Private Sub BtnRead_Click(sender As Object, e As EventArgs) Handles BtnReadApply.Click
-      Me.ModBus.ReadRegisters(NudModBusID.Value, If(RbtInput.Checked, ModBusDSM360.ModBusFun.Input, ModBusDSM360.ModBusFun.Holding), NudAddress.Value, NudQuantity.Value)
+      Me.SDM360.ReadRegisters(NudModBusID.Value, If(RbtInput.Checked, EastronSDM360.SDM360.ModBusFun.Input, EastronSDM360.SDM360.ModBusFun.Holding), NudAddress.Value, NudQuantity.Value)
       TsStatus.Text = "Read"
    End Sub
 
    Private Sub BtnWriteApply_Click(sender As Object, e As EventArgs) Handles BtnWriteApply.Click
-      Me.ModBus.WriteHoldingRegisters(NudModBusID.Value, ModBusDSM360.ModBusFun.HoldingWrite, NudAddress.Value, NudQuantity.Value, NudWriteValue.Value)
+      Me.SDM360.WriteHoldingRegisters(NudModBusID.Value, NudAddress.Value, NudQuantity.Value, NudWriteValue.Value)
       TsStatus.Text = "Write"
    End Sub
 
    Private Sub FrmModBus_Load(sender As Object, e As EventArgs) Handles Me.Load
-      ModBus = New ModBusClient(My.Settings.ComPort, My.Settings.BaudRate, My.Settings.DataBits, My.Settings.StopBits, My.Settings.Parity, My.Settings.ReadTimeOut, My.Settings.WriteTimeOut)
-      ModBus.Open()
+      SDM360 = New SDM360Client(My.Settings.ComPort, My.Settings.BaudRate, My.Settings.DataBits, My.Settings.StopBits, My.Settings.Parity, My.Settings.ReadTimeOut, My.Settings.WriteTimeOut)
+      SDM360.Open()
 
       Me.ContextMenuStrip = CmsMain
    End Sub
 
    Private Sub ModBus_ReceiveDataChanged(value As Single,
-                                         unit As ModBusDSM360.Unit,
-                                         fun As ModBusDSM360.ModBusFun,
-                                         message As String) Handles ModBus.Receive_Data_Changed
+                                         unit As SDM360.Unit,
+                                         fun As SDM360.ModBusFun,
+                                         message As String) Handles SDM360.Receive_Data_Changed
       Me.BeginInvoke(Sub()
                         Select Case fun
-                           Case ModBusDSM360.ModBusFun.Input
+                           Case EastronSDM360.SDM360.ModBusFun.Input
                               LblOutput.Text = $"{value:##0.00} {unit}"
-                           Case ModBusDSM360.ModBusFun.Holding
+                           Case EastronSDM360.SDM360.ModBusFun.Holding
                               LblOutput.Text = $"{value:0.#} {unit}"
                               NudWriteValue.Value = value
-                           Case ModBusDSM360.ModBusFun.HoldingWrite
+                           Case EastronSDM360.SDM360.ModBusFun.HoldingWrite
                               If message = "Ok" Then
                                  LblOutput.Text = $"{NudWriteValue.Value:##0.00} {unit}"
                               End If
@@ -59,7 +59,7 @@ Public Class FrmEastronDSM360
       Close()
    End Sub
 
-   Private Sub ModBus_Port_Status_Changed(isOpen As Boolean, message As String) Handles ModBus.Port_Status_Changed
+   Private Sub ModBus_Port_Status_Changed(isOpen As Boolean, message As String) Handles SDM360.Port_Status_Changed
       Me.BeginInvoke(Sub()
                         BtnReadApply.Enabled = isOpen
                         TsStatus.Text = message
@@ -72,9 +72,9 @@ Public Class FrmEastronDSM360
       frm.Show()
    End Sub
 
-   Private Sub ModBus_Device_Status_Changed(status As Boolean, message As String) Handles ModBus.Device_Status_Changed
+   Private Sub ModBus_Device_Status_Changed(status As Boolean, message As String) Handles SDM360.Device_Status_Changed
       Me.BeginInvoke(Sub()
-                        LblOutput.Text = $"{0:##0.00} {ModBusDSM360.Unit.Unkwown}"
+                        LblOutput.Text = $"{0:##0.00} {EastronSDM360.SDM360.Unit.Unkwown}"
                         TsStatus.Text = message
                      End Sub)
       TlsStatus.Text = message
