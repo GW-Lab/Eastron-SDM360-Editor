@@ -1,4 +1,14 @@
-﻿Imports System.IO.Ports
+﻿' Program..: Sonos.vb
+' Author...: G. Wassink
+' Design...: 
+' Date.....: 10/04/2019 Last revised:10/04/2019
+' Notice...: Copyright 2019 All Rights Reserved
+' Notes....: VB 16.0.1 .Net Framework 4.7.2
+' Files....: None
+' Programs.:
+' Reserved.: 
+
+Imports System.IO.Ports
 
 Public Class ModBusDSM360 : Inherits SerialPort
    Const ModBusReadPacketLengthExclPayload = 7
@@ -107,9 +117,8 @@ Public Class ModBusDSM360 : Inherits SerialPort
             Me.currUnit = GetUnit(startAddress)
             Me.currModBusID = modBusId
             Me.currFun = fun
+
             StartTimeOut()
-         Else
-            '  Return True
          End If
       Else
          RaiseEvent Device_Status_Changed(False, PortName + ": not open")
@@ -155,7 +164,7 @@ Public Class ModBusDSM360 : Inherits SerialPort
          If ModBusPacket.CRC16(buffer) Then
             RaiseEvent Receive_Data_Changed(ModBusClient.ConvertToFloat({buffer(3), buffer(4), buffer(5), buffer(6)}), Me.currUnit, Me.currFun, "Ok")
          Else
-            RaiseEvent Receive_Data_Changed(0, Me.currUnit, Me.currFun, "CRC Error")
+            RaiseEvent Receive_Data_Changed(0, Me.currUnit, Me.currFun, "CRC-Error!!")
          End If
       End If
    End Sub

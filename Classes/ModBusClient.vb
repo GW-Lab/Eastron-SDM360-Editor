@@ -1,4 +1,14 @@
-﻿Imports System.IO.Ports
+﻿' Program..: ModBusClient.vb
+' Author...: G. Wassink
+' Design...: 
+' Date.....: 11/03/2019 Last revised:10/04/2019
+' Notice...: Copyright 2019 All Rights Reserved
+' Notes....: VB 16.0.1 .Net Framework 4.7.2
+' Files....: None
+' Programs.:
+' Reserved.: 
+
+Imports System.IO.Ports
 
 Public Class ModBusClient : Inherits ModBusDSM360
    Public Event Port_Status_Changed(isOpen As Boolean, message As String)
@@ -16,7 +26,7 @@ Public Class ModBusClient : Inherits ModBusDSM360
    Public Overloads Sub Open()
       Try
          MyBase.Open()
-         RaiseEvent Port_Status_Changed(IsOpen, PortName + ": Open")
+         RaiseEvent Port_Status_Changed(IsOpen, PortName + ": Opened")
       Catch ex As Exception
          RaiseEvent Port_Status_Changed(IsOpen, PortName + ": not available!!")
       End Try

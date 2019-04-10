@@ -1,4 +1,14 @@
-﻿Public Class FrmSettings
+﻿' Program..: FrmSettings.vb
+' Author...: G. Wassink
+' Design...: 
+' Date.....: 08/04/2019 Last revised:10/04/2019
+' Notice...: Copyright 2019 All Rights Reserved
+' Notes....: VB 16.0.1 .Net Framework 4.7.2
+' Files....: None
+' Programs.:
+' Reserved.: 
+
+Public Class FrmSettings
    ReadOnly frm As Form
 
    Public Sub New(frm As Form)

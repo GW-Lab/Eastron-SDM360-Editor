@@ -1,9 +1,9 @@
 ﻿' Program..: FrmEastronDSM360.vb
 ' Author...: G. Wassink
 ' Design...: 
-' Date.....: 08/04/2019 Last revised:08/04/2019
-' Notice...: Copyright 1994-2016 All Rights Reserved
-' Notes....: VB 16.0 .Net Framework 4.7.2
+' Date.....: 08/04/2019 Last revised:10/04/2019
+' Notice...: Copyright 2019 All Rights Reserved
+' Notes....: VB 16.0.1 .Net Framework 4.7.2
 ' Files....: None
 ' Programs.:
 ' Reserved.:This SOFTWARE PRODUCT is provided by THE PROVIDER "as is" and "with all faults." THE PROVIDER makes no representations or warranties of any kind concerning the safety,
