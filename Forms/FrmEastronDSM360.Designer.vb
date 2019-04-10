@@ -60,9 +60,9 @@ Partial Class FrmEastronDSM360
       '
       'BtnReadApply
       '
-      Me.BtnReadApply.Location = New System.Drawing.Point(107, 10)
+      Me.BtnReadApply.Location = New System.Drawing.Point(122, 10)
       Me.BtnReadApply.Name = "BtnReadApply"
-      Me.BtnReadApply.Size = New System.Drawing.Size(60, 23)
+      Me.BtnReadApply.Size = New System.Drawing.Size(45, 23)
       Me.BtnReadApply.TabIndex = 0
       Me.BtnReadApply.Text = "Apply"
       Me.BtnReadApply.UseVisualStyleBackColor = True
@@ -111,7 +111,7 @@ Partial Class FrmEastronDSM360
       Me.LblOutput.AutoSize = True
       Me.LblOutput.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
       Me.LblOutput.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.LblOutput.Location = New System.Drawing.Point(10, 15)
+      Me.LblOutput.Location = New System.Drawing.Point(10, 17)
       Me.LblOutput.Name = "LblOutput"
       Me.LblOutput.Size = New System.Drawing.Size(14, 13)
       Me.LblOutput.TabIndex = 5
@@ -251,9 +251,9 @@ Partial Class FrmEastronDSM360
       '
       'BtnWriteApply
       '
-      Me.BtnWriteApply.Location = New System.Drawing.Point(109, 15)
+      Me.BtnWriteApply.Location = New System.Drawing.Point(123, 15)
       Me.BtnWriteApply.Name = "BtnWriteApply"
-      Me.BtnWriteApply.Size = New System.Drawing.Size(60, 23)
+      Me.BtnWriteApply.Size = New System.Drawing.Size(46, 23)
       Me.BtnWriteApply.TabIndex = 12
       Me.BtnWriteApply.Text = "Apply"
       Me.BtnWriteApply.UseVisualStyleBackColor = True

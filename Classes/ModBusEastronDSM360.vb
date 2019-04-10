@@ -16,11 +16,16 @@ Public Class ModBusDSM360 : Inherits SerialPort
    Public Event Device_Status_Changed(status As Boolean, Message As String)
 
    Private Sub Timer_Tick(obj As Object)
-      DiscardOutBuffer()
-      DiscardInBuffer()
       StopTimeOut()
 
-      RaiseEvent Device_Status_Changed(False, $"ModBus: {Me.currModBusID} Timeout")
+      If BytesToRead = 5 Then
+         RaiseEvent Device_Status_Changed(False, "Value out of range")
+      Else
+         RaiseEvent Device_Status_Changed(False, $"ModBus: {Me.currModBusID} Timeout")
+      End If
+
+      DiscardOutBuffer()
+      DiscardInBuffer()
    End Sub
 
    Private Sub StartTimeOut() ' Start TimeOut-Timer
@@ -60,7 +65,7 @@ Public Class ModBusDSM360 : Inherits SerialPort
       Input = 4
    End Enum
 
-   Public Sub ReadInputRegisters(modBusId As Byte, fun As ModBusFun, startAddress As UShort, quantity As UShort)
+   Public Sub ReadRegisters(modBusId As Byte, fun As ModBusFun, startAddress As UShort, quantity As UShort)
       If IsOpen Then
          If Not Me.requestSend Then
             Dim packet = New ModBusPacket
@@ -85,7 +90,7 @@ Public Class ModBusDSM360 : Inherits SerialPort
       End If
    End Sub
 
-   Public Sub WriteHoldingRegisters(modBusId As Byte, fun As ModBusFun, startAddress As UShort, quantity As UShort, value As UShort)
+   Public Sub WriteHoldingRegisters(modBusId As Byte, fun As ModBusFun, startAddress As UShort, quantity As UShort, value As Single)
       If IsOpen Then
          If Not Me.requestSend Then
             Dim packet = New ModBusPacket
@@ -102,7 +107,6 @@ Public Class ModBusDSM360 : Inherits SerialPort
             Me.currUnit = GetUnit(startAddress)
             Me.currModBusID = modBusId
             Me.currFun = fun
-
             StartTimeOut()
          Else
             '  Return True
@@ -142,9 +146,9 @@ Public Class ModBusDSM360 : Inherits SerialPort
    End Function
 
    Private Sub ModBusBaseSerial_DataReceived(sender As Object, e As SerialDataReceivedEventArgs) Handles Me.DataReceived
-      StopTimeOut()
-
       If BytesToRead > 0 AndAlso Me.bytesExpected = BytesToRead Then ' Data to process?
+         StopTimeOut()
+
          Dim buffer = New Byte(BytesToRead - 1) {}                   ' Create receive buffer 
          Read(buffer, 0, buffer.Length)                              ' Read data into receive buffer
 

@@ -18,7 +18,7 @@ Public Class FrmEastronDSM360
    Private WithEvents ModBus As ModBusClient
 
    Private Sub BtnRead_Click(sender As Object, e As EventArgs) Handles BtnReadApply.Click
-      Me.ModBus.ReadInputRegisters(NudModBusID.Value, If(RbtInput.Checked, ModBusDSM360.ModBusFun.Input, ModBusDSM360.ModBusFun.Holding), NudAddress.Value, NudQuantity.Value)
+      Me.ModBus.ReadRegisters(NudModBusID.Value, If(RbtInput.Checked, ModBusDSM360.ModBusFun.Input, ModBusDSM360.ModBusFun.Holding), NudAddress.Value, NudQuantity.Value)
       TsStatus.Text = "Read"
    End Sub
 
@@ -39,12 +39,17 @@ Public Class FrmEastronDSM360
                                          fun As ModBusDSM360.ModBusFun,
                                          message As String) Handles ModBus.Receive_Data_Changed
       Me.BeginInvoke(Sub()
-                        If fun = ModBusDSM360.ModBusFun.Input Then
-                           LblOutput.Text = $"{value:##0.00} {unit}"
-                        Else
-                           LblOutput.Text = $"{value:#} {unit}"
-                           NudWriteValue.Value = value
-                        End If
+                        Select Case fun
+                           Case ModBusDSM360.ModBusFun.Input
+                              LblOutput.Text = $"{value:##0.00} {unit}"
+                           Case ModBusDSM360.ModBusFun.Holding
+                              LblOutput.Text = $"{value:0.#} {unit}"
+                              NudWriteValue.Value = value
+                           Case ModBusDSM360.ModBusFun.HoldingWrite
+                              If message = "Ok" Then
+                                 LblOutput.Text = $"{NudWriteValue.Value:##0.00} {unit}"
+                              End If
+                        End Select
 
                         TsStatus.Text = message
                      End Sub)
@@ -88,6 +93,4 @@ Public Class FrmEastronDSM360
       NudAddress.Value = 40001
       GrpWrite.Enabled = True
    End Sub
-
-
 End Class
