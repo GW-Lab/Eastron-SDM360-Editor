@@ -17,15 +17,32 @@ Public Class SDM360 : Inherits SerialPort
    Private currModBusID As UShort
    Private currFun As Byte
    Private currUnit As Unit
+   Private currStartAddress As UShort
+   Private currQuantity As UShort
    Private bytesExpected As Integer = 0
    Private requestSend As Boolean = False
 
-   Private ReadOnly tmrTimeOut As New Threading.Timer(AddressOf Timer_Tick, Nothing, dueTime:=InfiniteTimeout, period:=InfiniteTimeout)
+   Private ReadOnly tmrTimeOut As New Threading.Timer(AddressOf Time_Out_Tick, Nothing, dueTime:=InfiniteTimeout, period:=InfiniteTimeout)
+   Private ReadOnly tmrReadInterval As New Threading.Timer(AddressOf Read_Interval_Tick, Nothing, dueTime:=InfiniteTimeout, period:=InfiniteTimeout)
 
    Public Event Receive_Data_Changed(value As Single, unit As Unit, fun As ModBusFun, message As String)
    Public Event Device_Status_Changed(status As Boolean, Message As String)
 
-   Private Sub Timer_Tick(obj As Object)
+   Private Sub Read_Interval_Tick(obj As Object)
+      ReadRegisters(Me.currModBusID, Me.currFun, Me.currStartAddress, Me.currquantity)
+   End Sub
+
+   Public WriteOnly Property ReadTimer As Boolean
+      Set(value As Boolean)
+         If value Then
+            Me.tmrReadInterval.Change(0, My.Settings.ReadInterval * 1000)
+         Else
+            Me.tmrReadInterval.Change(dueTime:=InfiniteTimeout, period:=InfiniteTimeout)
+         End If
+      End Set
+   End Property
+
+   Private Sub Time_Out_Tick(obj As Object)
       StopTimeOut()
 
       If BytesToRead = 5 Then
@@ -87,9 +104,12 @@ Public Class SDM360 : Inherits SerialPort
             Write(packet.ToArray, 0, packet.Count)
 
             Me.bytesExpected = ModBusReadPacketLengthExclPayload + quantity * 2
-            Me.currUnit = GetUnit(startAddress)
+
             Me.currModBusID = modBusId
             Me.currFun = fun
+            Me.currUnit = GetUnit(startAddress)
+            Me.currStartAddress = startAddress
+            Me.currQuantity = quantity
 
             StartTimeOut()
          Else
