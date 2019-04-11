@@ -84,14 +84,14 @@ Public Class SDM360 : Inherits SerialPort
             packet.AddRange(BitConverter.GetBytes(quantity * 2US).Reverse)                                                          ' Quantity
             packet.AddCRC()                                                                                                         ' Read ALL data added to the packet until now Compute CRC16 and append the CRC16 to the packet
 
-            Write(packet.ToArray, 0, packet.Count)
-
             Me.bytesExpected = ModBusReadPacketLengthExclPayload + quantity * 2
             Me.currUnit = GetUnit(startAddress)
             Me.currModBusID = modBusId
             Me.currFun = fun
 
             StartTimeOut()
+
+            Write(packet.ToArray, 0, packet.Count)
          Else
             '  Return True
          End If
@@ -111,14 +111,14 @@ Public Class SDM360 : Inherits SerialPort
             packet.AddRange(BitConverter.GetBytes(value).Reverse)                                                                   ' Payload
             packet.AddCRC()                                                                                                         ' Read ALL data added to the packet until now Compute CRC16 and append the CRC16 to the packet
 
-            Write(packet.ToArray, 0, packet.Count)
-
             Me.bytesExpected = ModBusWritePacketLengthExclPayload + quantity * 2
             Me.currUnit = GetUnit(startAddress)
             Me.currModBusID = modBusId
             Me.currFun = ModBusFun.HoldingWrite
 
             StartTimeOut()
+
+            Write(packet.ToArray, 0, packet.Count)
          End If
       Else
          RaiseEvent Device_Status_Changed(False, PortName + ": not open")
