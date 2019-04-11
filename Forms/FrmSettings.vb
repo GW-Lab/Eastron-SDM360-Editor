@@ -23,6 +23,7 @@ Public Class FrmSettings
       CmbBits.Text = My.Settings.DataBits
       CmbParity.SelectedIndex = My.Settings.Parity
       CmbStopBits.Text = My.Settings.StopBits
+      NudReadInterval.Value = My.Settings.ReadInterval
 
       Me.Location = Me.frm.Location
    End Sub
@@ -33,6 +34,7 @@ Public Class FrmSettings
       My.Settings.DataBits = CmbBits.Text
       My.Settings.StopBits = CmbStopBits.Text
       My.Settings.Parity = CmbParity.SelectedIndex
+      My.Settings.ReadInterval = NudReadInterval.Value
 
       Close()
    End Sub

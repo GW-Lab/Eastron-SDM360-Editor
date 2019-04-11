@@ -19,6 +19,11 @@ Public Class FrmSDM360
 
    Private Sub BtnRead_Click(sender As Object, e As EventArgs) Handles BtnReadApply.Click
       Me.SDM360.ReadRegisters(NudModBusID.Value, If(RbtInput.Checked, EastronSDM360.SDM360.ModBusFun.Input, EastronSDM360.SDM360.ModBusFun.Holding), NudAddress.Value, NudQuantity.Value)
+
+      If ChkReadTimer.Checked Then
+         Me.SDM360.ReadTimer = True
+      End If
+
       TsStatus.Text = "Read"
    End Sub
 
@@ -84,6 +89,7 @@ Public Class FrmSDM360
       NudAddress.Minimum = 30001
       NudAddress.Maximum = 30345
       NudAddress.Value = 30001
+      GrpRead.Enabled = True
       GrpWrite.Enabled = False
    End Sub
 
@@ -91,6 +97,13 @@ Public Class FrmSDM360
       NudAddress.Minimum = 40001
       NudAddress.Maximum = 40089
       NudAddress.Value = 40001
+
+      ChkReadTimer.Checked = False
+      GrpRead.Enabled = False
       GrpWrite.Enabled = True
+   End Sub
+
+   Private Sub ChkReadTimer_CheckedChanged(sender As Object, e As EventArgs) Handles ChkReadTimer.CheckedChanged
+      If Not ChkReadTimer.Checked Then Me.SDM360.ReadTimer = False
    End Sub
 End Class

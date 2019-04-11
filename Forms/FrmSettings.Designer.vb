@@ -38,9 +38,13 @@ Partial Class FrmSettings
       Me.NudPassword = New System.Windows.Forms.NumericUpDown()
       Me.Label1 = New System.Windows.Forms.Label()
       Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+      Me.NudReadInterval = New System.Windows.Forms.NumericUpDown()
+      Me.Label2 = New System.Windows.Forms.Label()
+      Me.Label3 = New System.Windows.Forms.Label()
       Me.GrpUSB.SuspendLayout()
       CType(Me.NudPassword, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.NudReadInterval, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
       'GrpUSB
@@ -55,9 +59,11 @@ Partial Class FrmSettings
       Me.GrpUSB.Controls.Add(Me.CmbStopBits)
       Me.GrpUSB.Controls.Add(Me.CmbComPort)
       Me.GrpUSB.Controls.Add(Me.CmbBPS)
-      Me.GrpUSB.Location = New System.Drawing.Point(142, 2)
+      Me.GrpUSB.Location = New System.Drawing.Point(189, 2)
+      Me.GrpUSB.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.GrpUSB.Name = "GrpUSB"
-      Me.GrpUSB.Size = New System.Drawing.Size(160, 160)
+      Me.GrpUSB.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+      Me.GrpUSB.Size = New System.Drawing.Size(213, 197)
       Me.GrpUSB.TabIndex = 12
       Me.GrpUSB.TabStop = False
       Me.GrpUSB.Text = "USB (RS485)"
@@ -65,45 +71,50 @@ Partial Class FrmSettings
       'Label33
       '
       Me.Label33.AutoSize = True
-      Me.Label33.Location = New System.Drawing.Point(6, 135)
+      Me.Label33.Location = New System.Drawing.Point(8, 166)
+      Me.Label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       Me.Label33.Name = "Label33"
-      Me.Label33.Size = New System.Drawing.Size(36, 13)
+      Me.Label33.Size = New System.Drawing.Size(49, 17)
       Me.Label33.TabIndex = 12
       Me.Label33.Text = "Pariry:"
       '
       'Label32
       '
       Me.Label32.AutoSize = True
-      Me.Label32.Location = New System.Drawing.Point(6, 110)
+      Me.Label32.Location = New System.Drawing.Point(8, 135)
+      Me.Label32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       Me.Label32.Name = "Label32"
-      Me.Label32.Size = New System.Drawing.Size(54, 13)
+      Me.Label32.Size = New System.Drawing.Size(73, 17)
       Me.Label32.TabIndex = 11
       Me.Label32.Text = "Stop bit(s)"
       '
       'Label31
       '
       Me.Label31.AutoSize = True
-      Me.Label31.Location = New System.Drawing.Point(6, 84)
+      Me.Label31.Location = New System.Drawing.Point(8, 103)
+      Me.Label31.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       Me.Label31.Name = "Label31"
-      Me.Label31.Size = New System.Drawing.Size(27, 13)
+      Me.Label31.Size = New System.Drawing.Size(35, 17)
       Me.Label31.TabIndex = 10
       Me.Label31.Text = "Bits:"
       '
       'Label30
       '
       Me.Label30.AutoSize = True
-      Me.Label30.Location = New System.Drawing.Point(6, 54)
+      Me.Label30.Location = New System.Drawing.Point(8, 66)
+      Me.Label30.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       Me.Label30.Name = "Label30"
-      Me.Label30.Size = New System.Drawing.Size(31, 13)
+      Me.Label30.Size = New System.Drawing.Size(39, 17)
       Me.Label30.TabIndex = 9
       Me.Label30.Text = "BPS:"
       '
       'Label29
       '
       Me.Label29.AutoSize = True
-      Me.Label29.Location = New System.Drawing.Point(6, 27)
+      Me.Label29.Location = New System.Drawing.Point(8, 33)
+      Me.Label29.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       Me.Label29.Name = "Label29"
-      Me.Label29.Size = New System.Drawing.Size(29, 13)
+      Me.Label29.Size = New System.Drawing.Size(38, 17)
       Me.Label29.TabIndex = 8
       Me.Label29.Text = "Port:"
       '
@@ -112,9 +123,10 @@ Partial Class FrmSettings
       Me.CmbParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
       Me.CmbParity.FormattingEnabled = True
       Me.CmbParity.Items.AddRange(New Object() {"None", "Odd", "Even"})
-      Me.CmbParity.Location = New System.Drawing.Point(78, 131)
+      Me.CmbParity.Location = New System.Drawing.Point(104, 161)
+      Me.CmbParity.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.CmbParity.Name = "CmbParity"
-      Me.CmbParity.Size = New System.Drawing.Size(74, 21)
+      Me.CmbParity.Size = New System.Drawing.Size(97, 24)
       Me.CmbParity.TabIndex = 7
       '
       'CmbBits
@@ -122,9 +134,10 @@ Partial Class FrmSettings
       Me.CmbBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
       Me.CmbBits.FormattingEnabled = True
       Me.CmbBits.Items.AddRange(New Object() {"8"})
-      Me.CmbBits.Location = New System.Drawing.Point(78, 77)
+      Me.CmbBits.Location = New System.Drawing.Point(104, 95)
+      Me.CmbBits.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.CmbBits.Name = "CmbBits"
-      Me.CmbBits.Size = New System.Drawing.Size(74, 21)
+      Me.CmbBits.Size = New System.Drawing.Size(97, 24)
       Me.CmbBits.TabIndex = 6
       '
       'CmbStopBits
@@ -132,9 +145,10 @@ Partial Class FrmSettings
       Me.CmbStopBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
       Me.CmbStopBits.FormattingEnabled = True
       Me.CmbStopBits.Items.AddRange(New Object() {"1", "2"})
-      Me.CmbStopBits.Location = New System.Drawing.Point(78, 104)
+      Me.CmbStopBits.Location = New System.Drawing.Point(104, 128)
+      Me.CmbStopBits.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.CmbStopBits.Name = "CmbStopBits"
-      Me.CmbStopBits.Size = New System.Drawing.Size(74, 21)
+      Me.CmbStopBits.Size = New System.Drawing.Size(97, 24)
       Me.CmbStopBits.TabIndex = 4
       '
       'CmbComPort
@@ -142,9 +156,10 @@ Partial Class FrmSettings
       Me.CmbComPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
       Me.CmbComPort.FormattingEnabled = True
       Me.CmbComPort.Items.AddRange(New Object() {"com1", "com2", "com3", "com4", "com5", "com6", "com7", "com8", "com9"})
-      Me.CmbComPort.Location = New System.Drawing.Point(78, 23)
+      Me.CmbComPort.Location = New System.Drawing.Point(104, 28)
+      Me.CmbComPort.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.CmbComPort.Name = "CmbComPort"
-      Me.CmbComPort.Size = New System.Drawing.Size(74, 21)
+      Me.CmbComPort.Size = New System.Drawing.Size(97, 24)
       Me.CmbComPort.TabIndex = 5
       '
       'CmbBPS
@@ -152,66 +167,103 @@ Partial Class FrmSettings
       Me.CmbBPS.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
       Me.CmbBPS.FormattingEnabled = True
       Me.CmbBPS.Items.AddRange(New Object() {"2400", "4800", "9600", "19200", "38400"})
-      Me.CmbBPS.Location = New System.Drawing.Point(78, 50)
+      Me.CmbBPS.Location = New System.Drawing.Point(104, 62)
+      Me.CmbBPS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.CmbBPS.Name = "CmbBPS"
-      Me.CmbBPS.Size = New System.Drawing.Size(74, 21)
+      Me.CmbBPS.Size = New System.Drawing.Size(97, 24)
       Me.CmbBPS.TabIndex = 3
       '
       'BtnApply
       '
-      Me.BtnApply.Location = New System.Drawing.Point(246, 168)
+      Me.BtnApply.Location = New System.Drawing.Point(293, 224)
+      Me.BtnApply.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.BtnApply.Name = "BtnApply"
-      Me.BtnApply.Size = New System.Drawing.Size(48, 23)
+      Me.BtnApply.Size = New System.Drawing.Size(97, 28)
       Me.BtnApply.TabIndex = 15
       Me.BtnApply.Text = "Apply"
       Me.BtnApply.UseVisualStyleBackColor = True
       '
       'NudPassword
       '
-      Me.NudPassword.Location = New System.Drawing.Point(63, 8)
+      Me.NudPassword.Location = New System.Drawing.Point(84, 12)
+      Me.NudPassword.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.NudPassword.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
       Me.NudPassword.Minimum = New Decimal(New Integer() {1000, 0, 0, 0})
       Me.NudPassword.Name = "NudPassword"
-      Me.NudPassword.Size = New System.Drawing.Size(60, 20)
+      Me.NudPassword.Size = New System.Drawing.Size(80, 22)
       Me.NudPassword.TabIndex = 13
       Me.NudPassword.Value = New Decimal(New Integer() {1001, 0, 0, 0})
       '
       'Label1
       '
       Me.Label1.AutoSize = True
-      Me.Label1.Location = New System.Drawing.Point(4, 11)
+      Me.Label1.Location = New System.Drawing.Point(5, 14)
+      Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       Me.Label1.Name = "Label1"
-      Me.Label1.Size = New System.Drawing.Size(56, 13)
+      Me.Label1.Size = New System.Drawing.Size(73, 17)
       Me.Label1.TabIndex = 14
       Me.Label1.Text = "Password:"
       '
       'PictureBox1
       '
       Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-      Me.PictureBox1.Location = New System.Drawing.Point(7, 39)
+      Me.PictureBox1.Location = New System.Drawing.Point(9, 48)
+      Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.PictureBox1.Name = "PictureBox1"
-      Me.PictureBox1.Size = New System.Drawing.Size(125, 123)
+      Me.PictureBox1.Size = New System.Drawing.Size(167, 151)
       Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
       Me.PictureBox1.TabIndex = 16
       Me.PictureBox1.TabStop = False
       '
+      'NumericUpDown1
+      '
+      Me.NudReadInterval.Increment = New Decimal(New Integer() {5, 0, 0, 0})
+      Me.NudReadInterval.Location = New System.Drawing.Point(111, 224)
+      Me.NudReadInterval.Maximum = New Decimal(New Integer() {900, 0, 0, 0})
+      Me.NudReadInterval.Name = "NumericUpDown1"
+      Me.NudReadInterval.Size = New System.Drawing.Size(65, 22)
+      Me.NudReadInterval.TabIndex = 17
+      '
+      'Label2
+      '
+      Me.Label2.AutoSize = True
+      Me.Label2.Location = New System.Drawing.Point(12, 226)
+      Me.Label2.Name = "Label2"
+      Me.Label2.Size = New System.Drawing.Size(96, 17)
+      Me.Label2.TabIndex = 18
+      Me.Label2.Text = "Read interval:"
+      '
+      'Label3
+      '
+      Me.Label3.AutoSize = True
+      Me.Label3.Location = New System.Drawing.Point(186, 227)
+      Me.Label3.Name = "Label3"
+      Me.Label3.Size = New System.Drawing.Size(63, 17)
+      Me.Label3.TabIndex = 19
+      Me.Label3.Text = "Seconds"
+      '
       'FrmSettings
       '
-      Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+      Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(307, 197)
+      Me.ClientSize = New System.Drawing.Size(409, 265)
+      Me.Controls.Add(Me.Label3)
+      Me.Controls.Add(Me.Label2)
+      Me.Controls.Add(Me.NudReadInterval)
       Me.Controls.Add(Me.BtnApply)
       Me.Controls.Add(Me.PictureBox1)
       Me.Controls.Add(Me.Label1)
       Me.Controls.Add(Me.NudPassword)
       Me.Controls.Add(Me.GrpUSB)
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+      Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
       Me.Name = "FrmSettings"
       Me.Text = "Eastron SDM360-V2"
       Me.GrpUSB.ResumeLayout(False)
       Me.GrpUSB.PerformLayout()
       CType(Me.NudPassword, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.NudReadInterval, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
@@ -232,4 +284,7 @@ Partial Class FrmSettings
    Friend WithEvents NudPassword As NumericUpDown
    Friend WithEvents Label1 As Label
    Friend WithEvents PictureBox1 As PictureBox
+   Friend WithEvents NudReadInterval As NumericUpDown
+   Friend WithEvents Label2 As Label
+   Friend WithEvents Label3 As Label
 End Class
